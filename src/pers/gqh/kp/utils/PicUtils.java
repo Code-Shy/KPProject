@@ -28,8 +28,6 @@ public class PicUtils {
         scatterPlotPaint();
     }
 
-
-
     public static void scatterPlotPaint() {
         double[][] a = {{1, 2, 3, 5, 6, 7, 8},
                         {4, 5, 6, 7, 8, 9, 10}};
