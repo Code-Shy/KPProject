@@ -1,4 +1,4 @@
-package com.nwnu.kp;
+package pers.gqh.kp;
 
 /**
  * @Package com.nwnu.kp
