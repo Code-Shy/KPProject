@@ -9,7 +9,7 @@ import java.util.List;
  * @Author Simple OR XXX
  * @Date 2022/3/17
  **/
-public class Utils {
+public class DataUtils {
 
     /**
      *
@@ -32,7 +32,4 @@ public class Utils {
         System.out.println(w);
         System.out.println(v);
     }
-
-
-
 }
