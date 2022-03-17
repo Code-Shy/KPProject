@@ -1,5 +1,7 @@
 package pers.gqh.kp.algorithm;
 
+import pers.gqh.kp.utils.DataUtils;
+
 import java.util.Arrays;
 
 /**
@@ -44,12 +46,17 @@ public class Algorithm {
         return V[n][C];//返回背包取得的最大价值
     }
 
-    public static void KnapsackGreedy() {
+    public static void KnapsackGreedy(int[] w, int[] v, int n, int C) {
+        //排序
+
+
+
+
 
     }
 
 
-    public static void KnapsackBT() {
+    public static void KnapsackBT(int[] w, int[] v, int n, int C) {
 
     }
 }
