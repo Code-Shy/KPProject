@@ -6,6 +6,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.*;
+import pers.gqh.kp.entity.Data;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,15 +24,21 @@ public class PicUtils {
 
     public static void main(String[] args) throws IOException {
 
-        scatterPlotPaint();
+
     }
 
-    public static void scatterPlotPaint() throws IOException {
-        double[][] a = {{1, 2, 3, 5, 6, 7, 8},
-                {4, 5, 6, 7, 8, 9, 10}};
+    public static void scatterPlotPaint(Data data) throws IOException {
+        double[][] tempData = new double[2][data.getN()];
+        for (int i = 0; i < data.getN(); i++) {
+            tempData[0][i] = Integer.parseInt(data.getW().get(i).toString());
+        }
+        for (int i = 0; i < data.getN(); i++) {
+            tempData[1][i] = Integer.parseInt(data.getV().get(i).toString());
+        }
+
 
         DefaultXYDataset defaultXYDataset = new DefaultXYDataset();
-        defaultXYDataset.addSeries(" ", a);
+        defaultXYDataset.addSeries(" ", tempData);
         JFreeChart chart = ChartFactory.createScatterPlot("", "Weight", "Value", defaultXYDataset,
                 PlotOrientation.VERTICAL, true, true, false);//设置表头，x轴，y轴，name表示问题的类型
         XYPlot xyplot = (XYPlot) chart.getPlot();

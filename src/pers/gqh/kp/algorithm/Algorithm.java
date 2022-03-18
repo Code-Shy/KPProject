@@ -70,9 +70,6 @@ public class Algorithm {
      */
     public static int KnapsackGreedy(int[] w, int[] v, int n, int C) {
 
-
-
-
         //解向量
         int[] x = new int[n];
         //最大价值
@@ -98,4 +95,5 @@ public class Algorithm {
     public static void KnapsackBT(int[] w, int[] v, int n, int C) {
 
     }
+
 }

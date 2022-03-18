@@ -1,9 +1,9 @@
 package pers.gqh.kp.utils;
 
+import pers.gqh.kp.entity.Data;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Package pers.gqh.kp.utils
@@ -12,34 +12,44 @@ import java.util.List;
  * @Date 2022/3/17
  **/
 public class DataUtils {
-    public static void main(String[] args) throws IOException {
-        List weight = new ArrayList();
-        List value = new ArrayList();
-        loadData("D:\\KP\\Data\\beibao0.in", weight, value);
+
+    public static Data loadData(int i) throws IOException {
+        Data data;
+        String filePath = "..\\..\\..\\Data\\beibao";
+        data = readFile(filePath + i + ".in");
+
+        return data;
     }
-
-
 
     /**
      *
      * @param fileName
-     * @throws IOException
+     * @return
+     * @throws
      */
-    public static void loadData (String fileName, List weight, List value) throws IOException {
+    public static Data readFile (String fileName) {
+        Data data = new Data();
         try (FileReader reader = new FileReader(fileName);
-             BufferedReader br = new BufferedReader(reader)) {
+            BufferedReader br = new BufferedReader(reader)) {
             String line;
+            int flag = 0;
             while ((line = br.readLine()) != null) {
                 // 一次读入一行数据
                 String[] s =line.split(" ");
-                weight.add(Integer.parseInt(s[0]));
-                value.add(Integer.parseInt(s[1]));
+                if (flag == 0){
+                    data.setC(Integer.parseInt(s[0]));
+                    data.setN(Integer.parseInt(s[1]));
+                    flag = 1;
+                }else {
+                    data.getW().add(Integer.parseInt(s[0]));
+                    data.getV().add(Integer.parseInt(s[1]));
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(weight);
-        System.out.println(value);
+        return data;
+
     }
 
     /**
@@ -82,6 +92,7 @@ public class DataUtils {
         System.out.println(Arrays.toString(orderSeq[1]));
 
         return orderSeq;
-
     }
+
+
 }
