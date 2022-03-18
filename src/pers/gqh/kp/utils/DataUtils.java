@@ -88,8 +88,6 @@ public class DataUtils {
             orderSeq[0][i] = w[index[i]];
             orderSeq[1][i] = v[index[i]];
         }
-        System.out.println(Arrays.toString(orderSeq[0]));
-        System.out.println(Arrays.toString(orderSeq[1]));
 
         return orderSeq;
     }

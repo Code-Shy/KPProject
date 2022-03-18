@@ -27,7 +27,7 @@ public class PicUtils {
 
     }
 
-    public static void scatterPlotPaint(Data data) throws IOException {
+    public static void scatterPlotPaint(Data data, int dataIndex) throws IOException {
         double[][] tempData = new double[2][data.getN()];
         for (int i = 0; i < data.getN(); i++) {
             tempData[0][i] = Integer.parseInt(data.getW().get(i).toString());
@@ -47,7 +47,8 @@ public class PicUtils {
         valueAxis.setAxisLineStroke(new BasicStroke(1.0f));//设置坐标轴粗细
 
         //输出PNG文件
-        OutputStream os_png = new FileOutputStream("D:/1.png");
+        //+ dataIndex + .\..\..\
+        OutputStream os_png = new FileOutputStream("pic/beibao" + dataIndex +".png");
         ChartUtilities.writeChartAsPNG(os_png, chart, 500, 500);
 
         //以面板显示
