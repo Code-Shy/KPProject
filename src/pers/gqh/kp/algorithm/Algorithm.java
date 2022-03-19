@@ -22,6 +22,7 @@ public class Algorithm {
      * @param v 物品价值
      * @param n 物品个数
      * @param C 背包容量
+     * @param x 解向量
      * @return 最大价值
      */
     public static int KnapsackDP(int[] w, int[] v, int n, int C, int[] x) {
@@ -58,11 +59,11 @@ public class Algorithm {
     /**
      * @param w 物品重量
      * @param v 物品价值
-     * @param n 物品个数
      * @param C 背包容量
+     * @param x 解向量
      * @return 最大价值
      */
-    public static int KnapsackGreedy(int[] w, int[] v, int n, int C, int[] x) {
+    public static int KnapsackGreedy(int[] w, int[] v, int C, int[] x) {
         //最大价值
         int maxValue = 0;
         int i = 0;

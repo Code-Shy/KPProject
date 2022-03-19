@@ -89,7 +89,7 @@ public class Main {
             System.out.println(Arrays.toString(v));
 
             oldTime = System.currentTimeMillis();
-            res = Algorithm.KnapsackGreedy(w, v, data.getN(), data.getC(), resVector);
+            res = Algorithm.KnapsackGreedy(w, v, data.getC(), resVector);
             newTime = System.currentTimeMillis();
 
         } else if (methodIndex == 2) {
@@ -107,6 +107,7 @@ public class Main {
         if (flag == true) {
             System.out.println("求解时间: " + (double) (newTime - oldTime) / 1000 + "s");
             System.out.println("较优解: " + res);
+            System.out.println("经过排序后的物品:　" + Arrays.toString(w));
             System.out.println("解向量: " + Arrays.toString(resVector));
         }
 
