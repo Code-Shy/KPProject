@@ -1,8 +1,11 @@
 package pers.gqh.kp;
 
-import pers.gqh.kp.algorithm.Algorithm;
+import pers.gqh.kp.algorithm.BT;
+import pers.gqh.kp.algorithm.DP;
+import pers.gqh.kp.algorithm.Greedy;
 import pers.gqh.kp.entity.Data;
 import pers.gqh.kp.utils.DataUtils;
+import pers.gqh.kp.utils.PicUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -29,7 +32,7 @@ public class Main {
 
 
         System.out.println("=========== 0-1 Knapsack problem solving system ===========");
-       /* System.out.println("请选择要查看的实验数据:");
+        System.out.println("请选择要查看的实验数据:");
         fileShow();
         dataIndex = sc.nextInt();
         data = DataUtils.loadData(dataIndex);
@@ -39,9 +42,9 @@ public class Main {
         fileShow();
         dataIndex = sc.nextInt();
         data = DataUtils.loadData(dataIndex);
-        PicUtils.scatterPlotPaint(data, dataIndex);*/
+        PicUtils.scatterPlotPaint(data, dataIndex);
 
-/*        System.out.println("请选择要按照价值重量比比进行非递增排序的实验数据:");
+        System.out.println("请选择要按照价值重量比比进行非递增排序的实验数据:");
         fileShow();
         dataIndex = sc.nextInt();
         data = DataUtils.loadData(dataIndex);
@@ -53,7 +56,7 @@ public class Main {
             v[i] = Integer.parseInt(data.getV().get(i).toString());
         }
         double[][] orderSeq = DataUtils.sortData(w, v);
-        sortingDataShow(orderSeq, dataIndex);*/
+        sortingDataShow(orderSeq, dataIndex);
 
         System.out.println("选择要求解的数据文件");
         fileShow();
@@ -64,8 +67,8 @@ public class Main {
         methodShow();
         methodIndex = sc.nextInt();
         int[] resVector = new int[data.getN()];
-        int[] w = new int[data.getN()];
-        int[] v = new int[data.getN()];
+        w = new int[data.getN()];
+        v = new int[data.getN()];
         int res;
         boolean flag = false;
         //Integer转换为int
@@ -75,9 +78,9 @@ public class Main {
         }
         if (methodIndex == 0) {
             flag = true;
-            oldTime = System.currentTimeMillis();
-            res = Algorithm.KnapsackDP(w, v, w.length, data.getC(), resVector);
-            newTime = System.currentTimeMillis();
+            oldTime = System.nanoTime();
+            res = DP.KnapsackDP(w, v, w.length, data.getC(), resVector);
+            newTime = System.nanoTime();
         } else if (methodIndex == 1) {
             flag = true;
             double[][] sortingData = DataUtils.sortData(w, v);
@@ -88,30 +91,37 @@ public class Main {
             System.out.println(Arrays.toString(w));
             System.out.println(Arrays.toString(v));
 
-            oldTime = System.currentTimeMillis();
-            res = Algorithm.KnapsackGreedy(w, v, data.getC(), resVector);
-            newTime = System.currentTimeMillis();
+            oldTime = System.nanoTime();
+            res = Greedy.KnapsackGreedy(w, v, data.getC(), resVector);
+            newTime = System.nanoTime();
 
         } else if (methodIndex == 2) {
             flag = true;
-            oldTime = System.currentTimeMillis();
-            res = 0;
-            newTime = System.currentTimeMillis();
+            BT.wight = w;
+            BT.value = v;
+            BT.C = data.getC();
+            BT.n = data.getN();
+            BT.ans = new int[BT.n];
+            BT.temp = new int[BT.n];
+            oldTime = System.nanoTime();
+            BT.backtrack(0, 0, 0);
+            newTime = System.nanoTime();
+            res = BT.maxValue;
+            resVector = BT.ans;
         } else {
             flag = false;
             oldTime = 0;
             newTime = 0;
             res = 0;
-            System.out.println("输入错误");
+            System.out.print("输入错误,请重新输入 :");
+            //methodIndex = sc.nextInt();
         }
         if (flag == true) {
-            System.out.println("求解时间: " + (double) (newTime - oldTime) / 1000 + "s");
-            System.out.println("较优解: " + res);
+            System.out.println("求解时间: " + (double) (newTime - oldTime) / 1000000000 + "s");
+            System.out.println("最优解: " + res);
             System.out.println("经过排序后的物品:　" + Arrays.toString(w));
             System.out.println("解向量: " + Arrays.toString(resVector));
         }
-
-
     }
 
 
@@ -137,7 +147,7 @@ public class Main {
 
     static void dataShow(Data data, int number) {
         System.out.println("beibao" + number + ".in的数据");
-        System.out.print("数据个数:" + data.getN());
+        System.out.print("物品个数:" + data.getN());
         System.out.println("    背包容量:" + data.getC());
         System.out.println("重量 价值");
         for (int i = 0; i < data.getN(); i++) {

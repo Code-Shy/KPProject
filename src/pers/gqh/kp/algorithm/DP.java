@@ -1,22 +1,12 @@
 package pers.gqh.kp.algorithm;
 
-import pers.gqh.kp.utils.DataUtils;
-
-import java.util.Arrays;
-
 /**
  * @Package pers.gqh.kp.algorithm
  * @Description
  * @Author Simple OR XXX
- * @Date 2022/3/17
+ * @Date 2022/3/19
  **/
-public class Algorithm {
-
-    public static void main(String[] args) {
-        int[] w = {79, 58, 86, 11, 28, 62, 15, 68};
-        int[] v = {83, 14, 54, 79, 72, 52, 48, 62};
-    }
-
+public class DP {
     /**
      * @param w 物品重量
      * @param v 物品价值
@@ -55,36 +45,4 @@ public class Algorithm {
         //返回背包取得的最大价值
         return V[n][C];
     }
-
-    /**
-     * @param w 物品重量
-     * @param v 物品价值
-     * @param C 背包容量
-     * @param x 解向量
-     * @return 最大价值
-     */
-    public static int KnapsackGreedy(int[] w, int[] v, int C, int[] x) {
-        //最大价值
-        int maxValue = 0;
-        int i = 0;
-        while (w[i] <= C) {
-            x[i] = 1;
-            C = C - w[i];
-            maxValue += v[i];
-            i++;
-        }
-        return maxValue;
-    }
-
-    /**
-     * @param w 物品重量
-     * @param v 物品价值
-     * @param n 物品个数
-     * @param C 背包容量
-     * @return 最大价值
-     */
-    public static void KnapsackBT(int[] w, int[] v, int n, int C) {
-
-    }
-
 }
