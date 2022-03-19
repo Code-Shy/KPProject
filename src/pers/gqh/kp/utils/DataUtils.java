@@ -58,13 +58,13 @@ public class DataUtils {
      * @param v 物品价值
      * @return orderSeq 经过排序后的物品序列，第一维为重量，第二维为价值
      */
-    public static int[][] sortData(int[] w, int[] v) {
+    public static double[][] sortData(int[] w, int[] v) {
 
 
         double[] vw = new double[w.length];
         int[] index = new int[w.length];
         //要返回的有序序列
-        int[][] orderSeq = new int[2][w.length];
+        double[][] orderSeq = new double[3][w.length];
 
         for (int i = 0; i < w.length; i++) {
             vw[i] = (double) v[i] / (double) w[i];
@@ -87,6 +87,7 @@ public class DataUtils {
         for (int i = 0; i < w.length; i++) {
             orderSeq[0][i] = w[index[i]];
             orderSeq[1][i] = v[index[i]];
+            orderSeq[2][i] = vw[i];
         }
 
         return orderSeq;

@@ -13,6 +13,7 @@ import java.util.List;
 public class Data {
     private ArrayList<Integer> w;
     private ArrayList<Integer> v;
+   // private int[] vw;
     private int n;
     private int C;
 
