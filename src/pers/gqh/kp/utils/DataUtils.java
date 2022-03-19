@@ -22,25 +22,24 @@ public class DataUtils {
     }
 
     /**
-     *
      * @param fileName
      * @return
      * @throws
      */
-    public static Data readFile (String fileName) {
+    public static Data readFile(String fileName) {
         Data data = new Data();
         try (FileReader reader = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(reader)) {
+             BufferedReader br = new BufferedReader(reader)) {
             String line;
             int flag = 0;
             while ((line = br.readLine()) != null) {
                 // 一次读入一行数据
-                String[] s =line.split(" ");
-                if (flag == 0){
+                String[] s = line.split(" ");
+                if (flag == 0) {
                     data.setC(Integer.parseInt(s[0]));
                     data.setN(Integer.parseInt(s[1]));
                     flag = 1;
-                }else {
+                } else {
                     data.getW().add(Integer.parseInt(s[0]));
                     data.getV().add(Integer.parseInt(s[1]));
                 }
@@ -53,7 +52,6 @@ public class DataUtils {
     }
 
     /**
-     *
      * @param w 物品重量
      * @param v 物品价值
      * @return orderSeq 经过排序后的物品序列，第一维为重量，第二维为价值
@@ -75,7 +73,7 @@ public class DataUtils {
             for (int j = i + 1; j < w.length; j++) {
                 if (vw[i] < vw[j]) {
                     temp = vw[i];
-                    vw [i] = vw[j];
+                    vw[i] = vw[j];
                     vw[j] = temp;
                     //交换i，j的下标
                     int x = index[i];

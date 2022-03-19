@@ -47,7 +47,7 @@ public class PicUtils {
         valueAxis.setAxisLineStroke(new BasicStroke(1.0f));//设置坐标轴粗细
 
         //输出PNG文件
-        OutputStream os_png = new FileOutputStream("pic/beibao" + dataIndex +".png");
+        OutputStream os_png = new FileOutputStream("pic/beibao" + dataIndex + ".png");
         ChartUtilities.writeChartAsPNG(os_png, chart, 500, 500);
 
         //以面板显示
