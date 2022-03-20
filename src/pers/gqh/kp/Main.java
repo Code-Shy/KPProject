@@ -154,7 +154,7 @@ public class Main {
                             flag = false;
                         }else {
                             flag = true;
-                            BT.wight = w;
+                            BT.weight = w;
                             BT.value = v;
                             BT.C = data.getC();
                             BT.n = data.getN();
