@@ -27,8 +27,8 @@ public class Main {
         //方法序号
         int methodIndex;
         //时间记录
-        long oldTime;
-        long newTime;
+        long oldTime = 0;
+        long newTime = 0;
         double time;
         //功能序号
         int funIndex;
@@ -122,7 +122,7 @@ public class Main {
                     int[] resVector = new int[data.getN()];
                     w = new int[data.getN()];
                     v = new int[data.getN()];
-                    int res;
+                    int res = 0;
                     boolean flag = false;
                     //Integer转换为int
                     for (int i = 0; i < data.getN(); i++) {
@@ -150,31 +150,32 @@ public class Main {
                         newTime = System.nanoTime();
                         //回溯
                     } else if (methodIndex == 2) {
-                        flag = true;
-                        BT.wight = w;
-                        BT.value = v;
-                        BT.C = data.getC();
-                        BT.n = data.getN();
-                        BT.ans = new int[BT.n];
-                        BT.temp = new int[BT.n];
-                        oldTime = System.nanoTime();
-                        BT.backtrack(0, 0, 0);
-                        newTime = System.nanoTime();
-                        res = BT.maxValue;
-                        resVector = BT.ans;
-                    } else {
-                        flag = false;
-                        oldTime = 0;
-                        newTime = 0;
-                        res = 0;
+                        if (data.getN() >= 100){
+                            flag = false;
+                        }else {
+                            flag = true;
+                            BT.wight = w;
+                            BT.value = v;
+                            BT.C = data.getC();
+                            BT.n = data.getN();
+                            BT.ans = new int[BT.n];
+                            BT.temp = new int[BT.n];
+                            oldTime = System.nanoTime();
+                            BT.backtrack(0, 0, 0);
+                            newTime = System.nanoTime();
+                            res = BT.maxValue;
+                            resVector = BT.ans;
+                        }
                     }
                     if (flag == true) {
                         time = (double) (newTime - oldTime) / 1000000000;
                         System.out.println("求解时间: " + time + "s");
                         System.out.println("最优解: " + res);
-                        System.out.println("经过排序后的物品:　" + Arrays.toString(w));
+                        System.out.println("物品:　" + Arrays.toString(w));
                         System.out.println("解向量: " + Arrays.toString(resVector));
                         DataUtils.writeFile(time, res, resVector, dataIndex);
+                    }else {
+                        System.out.println("无法计算");
                     }
                     break;
                 default:

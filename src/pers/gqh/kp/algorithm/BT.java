@@ -15,7 +15,6 @@ public class BT {
     public static int[] ans;
     //临时记录当前被放入背包的物品
     public static int[] temp;
-
     /**
      * 回溯法
      *
