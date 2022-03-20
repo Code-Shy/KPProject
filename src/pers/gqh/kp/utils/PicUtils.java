@@ -60,8 +60,6 @@ public class PicUtils {
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(560, 400));
 
-
-
         //创建一个主窗口来显示面板
         JFrame frame = new JFrame("散点图");
         frame.setLocation(500, 400);
@@ -71,7 +69,6 @@ public class PicUtils {
         frame.setContentPane(chartPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
-
     }
 
 

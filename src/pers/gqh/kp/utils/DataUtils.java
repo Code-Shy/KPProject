@@ -37,8 +37,6 @@ public class DataUtils {
         } finally {
             fileWriter.close();
         }
-
-
     }
 
     /**
