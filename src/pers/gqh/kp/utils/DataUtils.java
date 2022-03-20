@@ -13,14 +13,40 @@ import java.util.*;
  **/
 public class DataUtils {
 
+
+    public static void writeFile(double time, int res, int[] resVector, int dataIndex) throws IOException {
+        String filePath = "res/beibao" + dataIndex + ".txt";
+        FileWriter fileWriter = null;
+        try{
+            fileWriter = new FileWriter(filePath);
+            fileWriter.write("数据集: beibao" + dataIndex +"\n");
+            fileWriter.write("最优解: " + res  +"\n");
+            fileWriter.write("解向量: " + Arrays.toString(resVector) +"\n");
+            fileWriter.write("求解时间: " + time + "s");
+            System.out.println("数据写入到KP/res/beibao" + dataIndex+".txt");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            fileWriter.close();
+        }
+
+
+    }
+
+    /**
+     *
+     * @param i 文件序号
+     * @return
+     * @throws IOException
+     */
     public static Data loadData(int i) throws IOException {
         Data data;
-        String filePath = "..\\..\\..\\Data\\beibao";
+        String filePath = "..\\..\\..\\data\\beibao";
         data = readFile(filePath + i + ".in");
 
         return data;
     }
-
     /**
      * @param fileName
      * @return
@@ -54,11 +80,9 @@ public class DataUtils {
     /**
      * @param w 物品重量
      * @param v 物品价值
-     * @return orderSeq 经过排序后的物品序列，第一维为重量，第二维为价值
+     * @return orderSeq 经过排序后的物品序列，第一维为重量，第二维为价值，第三维为价值重量比
      */
     public static double[][] sortData(int[] w, int[] v) {
-
-
         double[] vw = new double[w.length];
         int[] index = new int[w.length];
         //要返回的有序序列

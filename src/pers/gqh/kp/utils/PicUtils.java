@@ -49,6 +49,7 @@ public class PicUtils {
         //输出PNG文件
         OutputStream os_png = new FileOutputStream("pic/beibao" + dataIndex + ".png");
         ChartUtilities.writeChartAsPNG(os_png, chart, 500, 500);
+        System.out.println("文件已导出到KP/pic/beibao"+dataIndex+".png");
 
         //以面板显示
         ChartPanel chartPanel = new ChartPanel(chart);

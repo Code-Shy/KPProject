@@ -23,104 +23,125 @@ public class Main {
         //数据
         Data data;
         //文件序号
-        int dataIndex;
+        int dataIndex = -1;
         //方法序号
         int methodIndex;
         //时间记录
         long oldTime;
         long newTime;
+        double time;
+        //功能序号
+        int funIndex;
+
 
 
         System.out.println("=========== 0-1 Knapsack problem solving system ===========");
-        System.out.println("请选择要查看的实验数据:");
-        fileShow();
-        dataIndex = sc.nextInt();
-        data = DataUtils.loadData(dataIndex);
-        dataShow(data, dataIndex);
+        while (true){
 
-        System.out.println("请选择要绘制散点图的实验数据:");
-        fileShow();
-        dataIndex = sc.nextInt();
-        data = DataUtils.loadData(dataIndex);
-        PicUtils.scatterPlotPaint(data, dataIndex);
+            System.out.println("-----------------------请选择您需要的功能----------------------");
+            System.out.println("1 - 查看实验数据  2 - 绘制散点图并导出   3 - 对实验数据进行排序   4 - 对实验数据求解并导出结果    0 - 退出");
+            funIndex = sc.nextInt();
+            switch(funIndex){
+                case 0:
+                    return;
+                case 1:
 
-        System.out.println("请选择要按照价值重量比比进行非递增排序的实验数据:");
-        fileShow();
-        dataIndex = sc.nextInt();
-        data = DataUtils.loadData(dataIndex);
-        int[] w = new int[data.getN()];
-        int[] v = new int[data.getN()];
-        //Integer转换为int
-        for (int i = 0; i < data.getN(); i++) {
-            w[i] = Integer.parseInt(data.getW().get(i).toString());
-            v[i] = Integer.parseInt(data.getV().get(i).toString());
-        }
-        double[][] orderSeq = DataUtils.sortData(w, v);
-        sortingDataShow(orderSeq, dataIndex);
+                    System.out.println("请选择要查看的实验数据:");
+                    fileShow();
+                    dataIndex = sc.nextInt();
+                    data = DataUtils.loadData(dataIndex);
+                    dataShow(data, dataIndex);
+                    break;
+                case 2:
+                    System.out.println("请选择要绘制散点图的实验数据:");
+                    fileShow();
+                    dataIndex = sc.nextInt();
+                    data = DataUtils.loadData(dataIndex);
+                    PicUtils.scatterPlotPaint(data, dataIndex);
+                    break;
+                case 3:
+                    System.out.println("请选择要按照价值重量比比进行非递增排序的实验数据:");
+                    fileShow();
+                    dataIndex = sc.nextInt();
+                    data = DataUtils.loadData(dataIndex);
+                    int[] w = new int[data.getN()];
+                    int[] v = new int[data.getN()];
+                    //Integer转换为int
+                    for (int i = 0; i < data.getN(); i++) {
+                        w[i] = Integer.parseInt(data.getW().get(i).toString());
+                        v[i] = Integer.parseInt(data.getV().get(i).toString());
+                    }
+                    double[][] orderSeq = DataUtils.sortData(w, v);
+                    sortingDataShow(orderSeq, dataIndex);
+                case 4:
+                    System.out.println("选择要求解的数据文件");
+                    fileShow();
+                    dataIndex = sc.nextInt();
+                    data = DataUtils.loadData(dataIndex);
 
-        System.out.println("选择要求解的数据文件");
-        fileShow();
-        dataIndex = sc.nextInt();
-        data = DataUtils.loadData(dataIndex);
-
-        System.out.println("选择求解的方法");
-        methodShow();
-        methodIndex = sc.nextInt();
-        int[] resVector = new int[data.getN()];
-        w = new int[data.getN()];
-        v = new int[data.getN()];
-        int res;
-        boolean flag = false;
-        //Integer转换为int
-        for (int i = 0; i < data.getN(); i++) {
-            w[i] = Integer.parseInt(data.getW().get(i).toString());
-            v[i] = Integer.parseInt(data.getV().get(i).toString());
-        }
-        if (methodIndex == 0) {
-            flag = true;
-            oldTime = System.nanoTime();
-            res = DP.KnapsackDP(w, v, w.length, data.getC(), resVector);
-            newTime = System.nanoTime();
-        } else if (methodIndex == 1) {
-            flag = true;
-            double[][] sortingData = DataUtils.sortData(w, v);
-            for (int i = 0; i < data.getN(); i++) {
-                w[i] = (int) sortingData[0][i];
-                v[i] = (int) sortingData[1][i];
+                    System.out.println("选择求解的方法");
+                    methodShow();
+                    methodIndex = sc.nextInt();
+                    int[] resVector = new int[data.getN()];
+                    w = new int[data.getN()];
+                    v = new int[data.getN()];
+                    int res;
+                    boolean flag = false;
+                    //Integer转换为int
+                    for (int i = 0; i < data.getN(); i++) {
+                        w[i] = Integer.parseInt(data.getW().get(i).toString());
+                        v[i] = Integer.parseInt(data.getV().get(i).toString());
+                    }
+                    if (methodIndex == 0) {
+                        flag = true;
+                        oldTime = System.nanoTime();
+                        res = DP.KnapsackDP(w, v, w.length, data.getC(), resVector);
+                        newTime = System.nanoTime();
+                    } else if (methodIndex == 1) {
+                        flag = true;
+                        double[][] sortingData = DataUtils.sortData(w, v);
+                        for (int i = 0; i < data.getN(); i++) {
+                            w[i] = (int) sortingData[0][i];
+                            v[i] = (int) sortingData[1][i];
+                        }
+                        System.out.println(Arrays.toString(w));
+                        System.out.println(Arrays.toString(v));
+                        oldTime = System.nanoTime();
+                        res = Greedy.KnapsackGreedy(w, v, data.getC(), resVector);
+                        newTime = System.nanoTime();
+                    } else if (methodIndex == 2) {
+                        flag = true;
+                        BT.wight = w;
+                        BT.value = v;
+                        BT.C = data.getC();
+                        BT.n = data.getN();
+                        BT.ans = new int[BT.n];
+                        BT.temp = new int[BT.n];
+                        oldTime = System.nanoTime();
+                        BT.backtrack(0, 0, 0);
+                        newTime = System.nanoTime();
+                        res = BT.maxValue;
+                        resVector = BT.ans;
+                    } else {
+                        flag = false;
+                        oldTime = 0;
+                        newTime = 0;
+                        res = 0;
+                        System.out.print("输入错误,请重新输入 :");
+                        //methodIndex = sc.nextInt();
+                    }
+                    if (flag == true) {
+                        time = (double) (newTime - oldTime) / 1000000000;
+                        System.out.println("求解时间: " + time + "s");
+                        System.out.println("最优解: " + res);
+                        System.out.println("经过排序后的物品:　" + Arrays.toString(w));
+                        System.out.println("解向量: " + Arrays.toString(resVector));
+                        DataUtils.writeFile(time, res, resVector, dataIndex);
+                    }
+                    break;
+                default:
+                    System.out.println("输入错误，请重新输入:");
             }
-            System.out.println(Arrays.toString(w));
-            System.out.println(Arrays.toString(v));
-
-            oldTime = System.nanoTime();
-            res = Greedy.KnapsackGreedy(w, v, data.getC(), resVector);
-            newTime = System.nanoTime();
-
-        } else if (methodIndex == 2) {
-            flag = true;
-            BT.wight = w;
-            BT.value = v;
-            BT.C = data.getC();
-            BT.n = data.getN();
-            BT.ans = new int[BT.n];
-            BT.temp = new int[BT.n];
-            oldTime = System.nanoTime();
-            BT.backtrack(0, 0, 0);
-            newTime = System.nanoTime();
-            res = BT.maxValue;
-            resVector = BT.ans;
-        } else {
-            flag = false;
-            oldTime = 0;
-            newTime = 0;
-            res = 0;
-            System.out.print("输入错误,请重新输入 :");
-            //methodIndex = sc.nextInt();
-        }
-        if (flag == true) {
-            System.out.println("求解时间: " + (double) (newTime - oldTime) / 1000000000 + "s");
-            System.out.println("最优解: " + res);
-            System.out.println("经过排序后的物品:　" + Arrays.toString(w));
-            System.out.println("解向量: " + Arrays.toString(resVector));
         }
     }
 
