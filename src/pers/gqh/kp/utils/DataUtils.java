@@ -23,7 +23,7 @@ public class DataUtils {
             fileWriter.write("最优解: " + res  +"\n");
             fileWriter.write("解向量: " + Arrays.toString(resVector) +"\n");
             fileWriter.write("求解时间: " + time + "s");
-            System.out.println("数据写入到KP/res/beibao" + dataIndex+".txt");
+            System.out.println("数据已写入到KP/res/beibao" + dataIndex+".txt");
 
         } catch (IOException e) {
             e.printStackTrace();
