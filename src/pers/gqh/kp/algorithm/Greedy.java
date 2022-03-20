@@ -8,6 +8,8 @@ package pers.gqh.kp.algorithm;
  **/
 public class Greedy {
     /**
+     * 贪心
+     *
      * @param w 物品重量
      * @param v 物品价值
      * @param C 背包容量

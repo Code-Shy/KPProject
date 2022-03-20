@@ -1,19 +1,17 @@
 package pers.gqh.kp.entity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 /**
  * @Package pers.gqh.kp.entity
- * @Description
+ * @Description 文件对应的实体类
  * @Author Simple OR XXX
  * @Date 2022/3/18
  **/
 public class Data {
     private ArrayList<Integer> w;
     private ArrayList<Integer> v;
-   // private int[] vw;
     private int n;
     private int C;
 

@@ -12,22 +12,29 @@ import java.util.*;
  * @Date 2022/3/17
  **/
 public class DataUtils {
-
-
+    /**
+     * 将求得的结果写入对应文件
+     *
+     * @param time      求解时间
+     * @param res       最优解
+     * @param resVector 解向量
+     * @param dataIndex 文件序号
+     * @throws IOException
+     */
     public static void writeFile(double time, int res, int[] resVector, int dataIndex) throws IOException {
         String filePath = "res/beibao" + dataIndex + ".txt";
         FileWriter fileWriter = null;
-        try{
+        try {
             fileWriter = new FileWriter(filePath);
-            fileWriter.write("数据集: beibao" + dataIndex +"\n");
-            fileWriter.write("最优解: " + res  +"\n");
-            fileWriter.write("解向量: " + Arrays.toString(resVector) +"\n");
+            fileWriter.write("数据集: beibao" + dataIndex + "\n");
+            fileWriter.write("最优解: " + res + "\n");
+            fileWriter.write("解向量: " + Arrays.toString(resVector) + "\n");
             fileWriter.write("求解时间: " + time + "s");
-            System.out.println("数据已写入到KP/res/beibao" + dataIndex+".txt");
+            System.out.println("数据已写入到KP/res/beibao" + dataIndex + ".txt");
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             fileWriter.close();
         }
 
@@ -35,19 +42,22 @@ public class DataUtils {
     }
 
     /**
+     * 加载数据
      *
      * @param i 文件序号
-     * @return
+     * @return data 要读入的数据
      * @throws IOException
      */
     public static Data loadData(int i) throws IOException {
         Data data;
         String filePath = "..\\..\\..\\data\\beibao";
         data = readFile(filePath + i + ".in");
-
         return data;
     }
+
     /**
+     * 从文件中读入数据
+     *
      * @param fileName
      * @return
      * @throws
@@ -59,13 +69,15 @@ public class DataUtils {
             String line;
             int flag = 0;
             while ((line = br.readLine()) != null) {
-                // 一次读入一行数据
+                // 读入一行数据
                 String[] s = line.split(" ");
                 if (flag == 0) {
+                    //读取背包容量和物品数
                     data.setC(Integer.parseInt(s[0]));
                     data.setN(Integer.parseInt(s[1]));
                     flag = 1;
                 } else {
+                    //将字符串s通过转化为int类型
                     data.getW().add(Integer.parseInt(s[0]));
                     data.getV().add(Integer.parseInt(s[1]));
                 }
@@ -78,6 +90,8 @@ public class DataUtils {
     }
 
     /**
+     * 将数据按价值重量比非递增排序
+     *
      * @param w 物品重量
      * @param v 物品价值
      * @return orderSeq 经过排序后的物品序列，第一维为重量，第二维为价值，第三维为价值重量比

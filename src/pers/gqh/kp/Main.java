@@ -33,25 +33,25 @@ public class Main {
         //功能序号
         int funIndex;
 
-
-
         System.out.println("============================ 0-1 Knapsack problem solving system ============================");
-        while (true){
+        while (true) {
             System.out.println("-------------------------------------- 请选择您需要的功能 --------------------------------------");
             System.out.println("1 - 查看实验数据  2 - 绘制散点图并导出   3 - 对实验数据进行排序   4 - 对实验数据求解并导出结果    0 - 退出");
             funIndex = sc.nextInt();
-            switch(funIndex){
+            switch (funIndex) {
                 case 0:
+                    //退出
                     System.out.println("系统已退出...");
                     return;
                 case 1:
+                    //实验数据加载
                     System.out.println("请选择要查看的实验数据:");
-                    while(true){
+                    while (true) {
                         fileShow();
                         dataIndex = sc.nextInt();
-                        if (dataIndex < 0 || dataIndex > 9){
+                        if (dataIndex < 0 || dataIndex > 9) {
                             System.out.println("输入错误，请重新输入");
-                        }else {
+                        } else {
                             break;
                         }
                     }
@@ -59,13 +59,14 @@ public class Main {
                     dataShow(data, dataIndex);
                     break;
                 case 2:
+                    //散点图绘制
                     System.out.println("请选择要绘制散点图的实验数据:");
-                    while(true){
+                    while (true) {
                         fileShow();
                         dataIndex = sc.nextInt();
-                        if (dataIndex < 0 || dataIndex > 9){
+                        if (dataIndex < 0 || dataIndex > 9) {
                             System.out.println("输入错误，请重新输入");
-                        }else {
+                        } else {
                             break;
                         }
                     }
@@ -73,13 +74,14 @@ public class Main {
                     PicUtils.scatterPlotPaint(data, dataIndex);
                     break;
                 case 3:
+                    //数据排序
                     System.out.println("请选择要按照价值重量比比进行非递增排序的实验数据:");
-                    while(true){
+                    while (true) {
                         fileShow();
                         dataIndex = sc.nextInt();
-                        if (dataIndex < 0 || dataIndex > 9){
+                        if (dataIndex < 0 || dataIndex > 9) {
                             System.out.println("输入错误，请重新输入");
-                        }else {
+                        } else {
                             break;
                         }
                     }
@@ -95,24 +97,25 @@ public class Main {
                     sortingDataShow(orderSeq, dataIndex);
                     break;
                 case 4:
+                    //求解
                     System.out.println("选择要求解的数据文件");
-                    while(true){
+                    while (true) {
                         fileShow();
                         dataIndex = sc.nextInt();
-                        if (dataIndex < 0 || dataIndex > 9){
+                        if (dataIndex < 0 || dataIndex > 9) {
                             System.out.println("输入错误，请重新输入");
-                        }else {
+                        } else {
                             break;
                         }
                     }
                     data = DataUtils.loadData(dataIndex);
                     System.out.println("选择求解的方法");
-                    while (true){
+                    while (true) {
                         methodShow();
                         methodIndex = sc.nextInt();
-                        if (methodIndex < 0 || methodIndex > 2){
+                        if (methodIndex < 0 || methodIndex > 2) {
                             System.out.println("输入错误，请重新输入");
-                        }else {
+                        } else {
                             break;
                         }
                     }
@@ -126,11 +129,13 @@ public class Main {
                         w[i] = Integer.parseInt(data.getW().get(i).toString());
                         v[i] = Integer.parseInt(data.getV().get(i).toString());
                     }
+                    //动态规划
                     if (methodIndex == 0) {
                         flag = true;
                         oldTime = System.nanoTime();
                         res = DP.KnapsackDP(w, v, w.length, data.getC(), resVector);
                         newTime = System.nanoTime();
+                        //贪心
                     } else if (methodIndex == 1) {
                         flag = true;
                         double[][] sortingData = DataUtils.sortData(w, v);
@@ -143,6 +148,7 @@ public class Main {
                         oldTime = System.nanoTime();
                         res = Greedy.KnapsackGreedy(w, v, data.getC(), resVector);
                         newTime = System.nanoTime();
+                        //回溯
                     } else if (methodIndex == 2) {
                         flag = true;
                         BT.wight = w;
@@ -177,7 +183,9 @@ public class Main {
         }
     }
 
-
+    /**
+     * 文件展示
+     */
     static void fileShow() {
         for (int i = 0; i < 10; i++) {
             if (i == 5) {
@@ -188,11 +196,17 @@ public class Main {
         System.out.println();
     }
 
+    /**
+     * 方法展示
+     */
     static void methodShow() {
         System.out.println("0 - 动态规划    1 - 贪心    2 - 回溯");
     }
 
-
+    /**
+     * @param orderSeq  三维数组，第一维为重量，第二维为价值，第三维为价值重量比
+     * @param dataIndex
+     */
     static void sortingDataShow(double[][] orderSeq, int dataIndex) {
         System.out.println("beibao" + dataIndex + ".in排序后的数据");
         System.out.println("重量   价值  价值重量比");
@@ -201,6 +215,10 @@ public class Main {
         }
     }
 
+    /**
+     * @param data   文件对应的数据类
+     * @param number 文件序号
+     */
     static void dataShow(Data data, int number) {
         System.out.println("beibao" + number + ".in的数据");
         System.out.print("物品个数:" + data.getN());

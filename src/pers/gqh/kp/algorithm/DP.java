@@ -8,6 +8,8 @@ package pers.gqh.kp.algorithm;
  **/
 public class DP {
     /**
+     * 动态规划
+     *
      * @param w 物品重量
      * @param v 物品价值
      * @param n 物品个数

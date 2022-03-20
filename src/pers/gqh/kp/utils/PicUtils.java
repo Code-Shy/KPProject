@@ -21,14 +21,16 @@ import java.io.OutputStream;
  * @Date 2022/3/17
  **/
 public class PicUtils {
-
-    public static void main(String[] args) throws IOException {
-
-
-    }
-
+    /**
+     * 画散点图
+     *
+     * @param data      数据
+     * @param dataIndex 文件序号
+     * @throws IOException
+     */
     public static void scatterPlotPaint(Data data, int dataIndex) throws IOException {
         double[][] tempData = new double[2][data.getN()];
+        //将Integer转换为int
         for (int i = 0; i < data.getN(); i++) {
             tempData[0][i] = Integer.parseInt(data.getW().get(i).toString());
         }
@@ -36,20 +38,23 @@ public class PicUtils {
             tempData[1][i] = Integer.parseInt(data.getV().get(i).toString());
         }
 
-
         DefaultXYDataset defaultXYDataset = new DefaultXYDataset();
+        //添加数据
         defaultXYDataset.addSeries(" ", tempData);
+        //设置表头，x轴，y轴
         JFreeChart chart = ChartFactory.createScatterPlot("", "Weight", "Value", defaultXYDataset,
-                PlotOrientation.VERTICAL, true, true, false);//设置表头，x轴，y轴，name表示问题的类型
+                PlotOrientation.VERTICAL, true, true, false);
         XYPlot xyplot = (XYPlot) chart.getPlot();
-        xyplot.setBackgroundPaint(Color.white);//设置背景面板颜色
+        //设置背景面板颜色
+        xyplot.setBackgroundPaint(Color.white);
         ValueAxis valueAxis = xyplot.getDomainAxis();
-        valueAxis.setAxisLineStroke(new BasicStroke(1.0f));//设置坐标轴粗细
+        //设置坐标轴粗细
+        valueAxis.setAxisLineStroke(new BasicStroke(1.0f));
 
         //输出PNG文件
         OutputStream os_png = new FileOutputStream("pic/beibao" + dataIndex + ".png");
         ChartUtilities.writeChartAsPNG(os_png, chart, 500, 500);
-        System.out.println("文件已导出到KP/pic/beibao"+dataIndex+".png");
+        System.out.println("文件已导出到KP/pic/beibao" + dataIndex + ".png");
 
         //以面板显示
         ChartPanel chartPanel = new ChartPanel(chart);
