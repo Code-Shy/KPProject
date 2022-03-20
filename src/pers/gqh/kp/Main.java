@@ -35,14 +35,14 @@ public class Main {
 
 
 
-        System.out.println("=========== 0-1 Knapsack problem solving system ===========");
+        System.out.println("============================ 0-1 Knapsack problem solving system ============================");
         while (true){
-
-            System.out.println("-----------------------请选择您需要的功能----------------------");
+            System.out.println("-------------------------------------- 请选择您需要的功能 --------------------------------------");
             System.out.println("1 - 查看实验数据  2 - 绘制散点图并导出   3 - 对实验数据进行排序   4 - 对实验数据求解并导出结果    0 - 退出");
             funIndex = sc.nextInt();
             switch(funIndex){
                 case 0:
+                    System.out.println("系统已退出...");
                     return;
                 case 1:
                     System.out.println("请选择要查看的实验数据:");
@@ -180,6 +180,9 @@ public class Main {
 
     static void fileShow() {
         for (int i = 0; i < 10; i++) {
+            if (i == 5) {
+                System.out.println();
+            }
             System.out.print(i + " - beibao" + i + ".in    ");
         }
         System.out.println();
