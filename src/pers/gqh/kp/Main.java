@@ -45,24 +45,44 @@ public class Main {
                 case 0:
                     return;
                 case 1:
-
                     System.out.println("请选择要查看的实验数据:");
-                    fileShow();
-                    dataIndex = sc.nextInt();
+                    while(true){
+                        fileShow();
+                        dataIndex = sc.nextInt();
+                        if (dataIndex < 0 || dataIndex > 9){
+                            System.out.println("输入错误，请重新输入");
+                        }else {
+                            break;
+                        }
+                    }
                     data = DataUtils.loadData(dataIndex);
                     dataShow(data, dataIndex);
                     break;
                 case 2:
                     System.out.println("请选择要绘制散点图的实验数据:");
-                    fileShow();
-                    dataIndex = sc.nextInt();
+                    while(true){
+                        fileShow();
+                        dataIndex = sc.nextInt();
+                        if (dataIndex < 0 || dataIndex > 9){
+                            System.out.println("输入错误，请重新输入");
+                        }else {
+                            break;
+                        }
+                    }
                     data = DataUtils.loadData(dataIndex);
                     PicUtils.scatterPlotPaint(data, dataIndex);
                     break;
                 case 3:
                     System.out.println("请选择要按照价值重量比比进行非递增排序的实验数据:");
-                    fileShow();
-                    dataIndex = sc.nextInt();
+                    while(true){
+                        fileShow();
+                        dataIndex = sc.nextInt();
+                        if (dataIndex < 0 || dataIndex > 9){
+                            System.out.println("输入错误，请重新输入");
+                        }else {
+                            break;
+                        }
+                    }
                     data = DataUtils.loadData(dataIndex);
                     int[] w = new int[data.getN()];
                     int[] v = new int[data.getN()];
@@ -73,15 +93,29 @@ public class Main {
                     }
                     double[][] orderSeq = DataUtils.sortData(w, v);
                     sortingDataShow(orderSeq, dataIndex);
+                    break;
                 case 4:
                     System.out.println("选择要求解的数据文件");
-                    fileShow();
-                    dataIndex = sc.nextInt();
+                    while(true){
+                        fileShow();
+                        dataIndex = sc.nextInt();
+                        if (dataIndex < 0 || dataIndex > 9){
+                            System.out.println("输入错误，请重新输入");
+                        }else {
+                            break;
+                        }
+                    }
                     data = DataUtils.loadData(dataIndex);
-
                     System.out.println("选择求解的方法");
-                    methodShow();
-                    methodIndex = sc.nextInt();
+                    while (true){
+                        methodShow();
+                        methodIndex = sc.nextInt();
+                        if (methodIndex < 0 || methodIndex > 2){
+                            System.out.println("输入错误，请重新输入");
+                        }else {
+                            break;
+                        }
+                    }
                     int[] resVector = new int[data.getN()];
                     w = new int[data.getN()];
                     v = new int[data.getN()];
@@ -127,8 +161,6 @@ public class Main {
                         oldTime = 0;
                         newTime = 0;
                         res = 0;
-                        System.out.print("输入错误,请重新输入 :");
-                        //methodIndex = sc.nextInt();
                     }
                     if (flag == true) {
                         time = (double) (newTime - oldTime) / 1000000000;
