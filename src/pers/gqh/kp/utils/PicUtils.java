@@ -1,6 +1,7 @@
 package pers.gqh.kp.utils;
 
 
+import jdk.jfr.Event;
 import org.jfree.chart.*;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
@@ -60,6 +61,8 @@ public class PicUtils {
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(560, 400));
 
+
+
         //创建一个主窗口来显示面板
         JFrame frame = new JFrame("散点图");
         frame.setLocation(500, 400);
@@ -67,9 +70,9 @@ public class PicUtils {
 
         //将主窗口的内容面板设置为图表面板
         frame.setContentPane(chartPanel);
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
+
     }
 
 
